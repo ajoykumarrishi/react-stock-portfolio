@@ -12,7 +12,7 @@ This is a React application for managing a stock portfolio. Users can add stocks
 
 ## Live Demo
 
-You can view a live demo of the application [here](https://ajoykumarrishi.github.io/react-stock-portfolio).
+You can view a live demo of the application [here](https://ajoykumarrishi.github.io/react-stock-portfolio/).
 
 ## Installation
 
