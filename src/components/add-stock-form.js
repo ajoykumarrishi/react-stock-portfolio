@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
-const AddStockForm = ({ addStock }) => {
+function AddStockForm({ addStock }) {
   const [newStock, setNewStock] = useState({
     name: '',
     shares: '',
@@ -9,71 +9,81 @@ const AddStockForm = ({ addStock }) => {
     currentPrice: '',
   });
 
-  const handleChange = (e) => {
+  function handleChange(e) {
     const { name, value } = e.target;
-    setNewStock((prevStock) => ({
+    setNewStock(prevStock => ({
       ...prevStock,
       [name]: value,
     }));
-  };
+  }
 
-  const handleSubmit = (e) => {
+  function handleSubmit(e) {
     e.preventDefault();
-    addStock(newStock); 
+    addStock(newStock);
     setNewStock({
       name: '',
-      shares: 0,
-      costPerShare: 0,
-      currentPrice: 0,
+      shares: '',
+      costPerShare: '',
+      currentPrice: '',
     });
-  };
+  }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label htmlFor="name">Stock Name:</label>
+    <form 
+      onSubmit={handleSubmit} 
+      className="mt-3"
+      style={{color: 'grey'}}
+    >
+      <div className="d-flex">
         <input
           type="text"
           name="name"
           value={newStock.name}
           onChange={handleChange}
-          placeholder="Name"
+          placeholder="Stock Name"
+          className="form-control bg-dark text-light border-secondary me-2"
         />
-      </div>
-      <div>
-        <label htmlFor="shares">Number of Shares:</label>
         <input
           type="number"
           name="shares"
-          value={isNaN(newStock.shares) ? "" : newStock.shares} 
+          value={newStock.shares}
           onChange={handleChange}
-          placeholder="Enter number of shares"
+          placeholder="Number of Shares"
+          className="form-control bg-dark text-light border-secondary me-2"
         />
-      </div>
-      <div>
-        <label htmlFor="costPerShare">Cost per Share:</label>
         <input
           type="number"
           name="costPerShare"
-          value={isNaN(newStock.costPerShare) ? "" : newStock.costPerShare}
+          value={newStock.costPerShare}
           onChange={handleChange}
-          placeholder="Enter cost per share"
+          placeholder="Cost per Share ($)"
+          className="form-control bg-dark text-light border-secondary me-2"
         />
-      </div>
-      <div>
-        <label htmlFor="currentPrice">Current Price:</label>
         <input
           type="number"
           name="currentPrice"
-          value={isNaN(newStock.currentPrice) ? "" : newStock.currentPrice}
+          value={newStock.currentPrice}
           onChange={handleChange}
-          placeholder="Enter current price"
+          placeholder="Current Market Price ($)"
+          className="form-control bg-dark text-light border-secondary me-2"
         />
+        <button 
+          type="submit" 
+          className="btn btn-outline-primary"
+          style={{ 
+            transition: 'background-color 0.3s, color 0.3s',
+            ':hover': {
+              backgroundColor: 'green',
+              color: 'white'
+            }
+          }}
+        >
+          Add
+        </button>
       </div>
-      <button type="submit">Add</button>
     </form>
   );
-};
+}
 
 AddStockForm.propTypes = {
   addStock: PropTypes.func.isRequired,

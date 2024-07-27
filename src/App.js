@@ -3,8 +3,8 @@ import Portfolio from './components/portfolio';
 
 function App() {
   return (
-    <div>
-      <Portfolio /> 
+    <div className="bg-dark min-vh-100 py-4">
+      <Portfolio />
     </div>
   );
 }
