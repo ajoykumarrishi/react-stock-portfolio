@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/react-stock-portfolio/static/css/main.d5289b2f.css",
+    "main.js": "/react-stock-portfolio/static/js/main.dfa5f740.js",
+    "index.html": "/react-stock-portfolio/index.html",
+    "main.d5289b2f.css.map": "/react-stock-portfolio/static/css/main.d5289b2f.css.map",
+    "main.dfa5f740.js.map": "/react-stock-portfolio/static/js/main.dfa5f740.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.d5289b2f.css",
+    "static/js/main.dfa5f740.js"
+  ]
+}
