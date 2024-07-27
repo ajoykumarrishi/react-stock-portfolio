@@ -1,14 +1,12 @@
 import React from 'react';
-import AddStockForm from './components/add-stock-form';
+import Portfolio from './components/portfolio'; 
 
-const App = () => {
+function App() {
   return (
     <div>
-      <h1>Stock Portfolio</h1>
-      <p>Under Construction</p>
-      <AddStockForm addStock={(output) => console.log(output)} />
+      <Portfolio /> 
     </div>
-  )
-};
+  );
+}
 
 export default App;
