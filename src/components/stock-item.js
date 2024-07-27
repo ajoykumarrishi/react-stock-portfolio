@@ -1,55 +1,68 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-const StockItem = ({ stock, onUpdateStock, onRemoveStock }) => {
-  const [updatedStock, setUpdatedStock] = useState(stock);
-
-  const handleChange = (e) => {
+function StockItem({ stock, onUpdateStock, onRemoveStock }) {
+  function handleChange(e) {
     const { name, value } = e.target;
-    const updatedValue = name === 'name' ? value : parseInt(value, 10);
-    setUpdatedStock({
-      ...updatedStock,
-      [name]: isNaN(updatedValue) || updatedValue < 0 ? stock[name] : updatedValue,
-    });
     onUpdateStock({
       ...stock,
-      [name]: isNaN(updatedValue) || updatedValue < 0 ? stock[name] : updatedValue,
+      [name]: name === 'name' ? value : parseFloat(value),
     });
-  };
+  }
+
+  const marketValue = stock.shares * stock.currentPrice;
+  const unrealizedGainLoss = stock.shares * (stock.currentPrice - stock.costPerShare);
 
   return (
-    <tr> 
-      <td>{updatedStock.name}</td>
+    <tr className="text-light" style={{ fontFamily: 'monospace' }}>
+      <td>{stock.name}</td>
       <td>
-        <input 
-          type="number" 
-          name="shares" 
-          value={updatedStock.shares} 
-          onChange={handleChange} 
+        <input
+          type="number"
+          name="shares"
+          value={stock.shares}
+          onChange={handleChange}
+          className="form-control bg-dark text-light border-secondary"
         />
       </td>
       <td>
         <input
           type="number"
           name="costPerShare"
-          value={updatedStock.costPerShare}
+          value={stock.costPerShare}
           onChange={handleChange}
+          className="form-control bg-dark text-light border-secondary"
         />
       </td>
       <td>
         <input
           type="number"
           name="currentPrice"
-          value={updatedStock.currentPrice}
+          value={stock.currentPrice}
           onChange={handleChange}
+          className="form-control bg-dark text-light border-secondary"
         />
       </td>
-      <td>{updatedStock.shares * updatedStock.currentPrice}</td>
-      <td>{updatedStock.shares * (updatedStock.currentPrice - updatedStock.costPerShare)}</td>
+      <td>{marketValue.toFixed(2)}</td>
+      <td className={unrealizedGainLoss >= 0 ? "text-success" : "text-danger"}>
+        {unrealizedGainLoss.toFixed(2)}
+      </td>
       <td>
-        <button onClick={() => onRemoveStock(updatedStock.name)}>Remove</button>
+        <button 
+          onClick={() => onRemoveStock(stock.name)} 
+          className="btn btn-outline-danger btn-sm"
+          style={{ 
+            transition: 'background-color 0.3s, color 0.3s',
+            ':hover': {
+              backgroundColor: 'red',
+              color: 'white'
+            }
+          }}
+        >
+          remove
+        </button>
       </td>
     </tr>
   );
-};
+}
 
 export default StockItem;
